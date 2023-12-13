@@ -14,7 +14,10 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
-<style scoped>
+<style>
+@import"https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap";
+@import"https://fonts.googleapis.com/icon?family=Material+Icons";
+
 header {
   line-height: 1.5;
   max-height: 100vh;
