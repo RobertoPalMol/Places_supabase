@@ -1,9 +1,7 @@
 <script>
 import axios from "axios";
 import {RouterLink} from "vue-router";
-import {VaButton} from "vuestic-ui";
-
-
+import {VaButton} from "vuestic-ui"
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: {VaButton, RouterLink},
@@ -40,10 +38,13 @@ export default {
       </thead>
       <tbody>
       <tr v-for="(Deportivo) in DeportivosSorted" :key="Deportivo.id">
-        <td><router-link to="/about">{{Deportivo.id}}</router-link></td>
-          <router-link to="{ name: '/about/${Deportivo.Coche}', params: {Deportivos: Deportivos.Coche}}"><VaButton round>
-            <td>{{Deportivo.Coche}}</td>
-          </VaButton></router-link>
+        <td>{{Deportivo.id}}</td>
+        <router-link :to="{ name: 'Coche', params: { id: Deportivo.id.toString() } }">
+          <VaButton round>
+            <span>{{ Deportivo.Coche }}</span>
+          </VaButton>
+        </router-link>
+
         <td><img :src="Deportivo.Imagen"></td>
 
       </tr>

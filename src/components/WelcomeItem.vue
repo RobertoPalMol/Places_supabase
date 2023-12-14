@@ -76,11 +76,11 @@ h3 {
   }
 
   .item:first-of-type:before {
-    display: none;
+    display: flex;
   }
 
   .item:last-of-type:after {
-    display: none;
+    display: flex;
   }
 }
 </style>
