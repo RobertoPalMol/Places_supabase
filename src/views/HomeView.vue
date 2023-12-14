@@ -1,11 +1,12 @@
 <script>
 import axios from "axios";
 import {RouterLink} from "vue-router";
+import {VaButton} from "vuestic-ui";
 
 
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: {RouterLink},
+  components: {VaButton, RouterLink},
   data(){
     return{
       Deportivos:[],
@@ -39,56 +40,15 @@ export default {
       </thead>
       <tbody>
       <tr v-for="(Deportivo) in DeportivosSorted" :key="Deportivo.id">
-        <td>{{Deportivo.id}}</td>
-        <td to="/">{{Deportivo.Coche}}</td>
+        <td><router-link to="/about">{{Deportivo.id}}</router-link></td>
+          <router-link to="{ name: '/about/${Deportivo.Coche}', params: {Deportivos: Deportivos.Coche}}"><VaButton round>
+            <td>{{Deportivo.Coche}}</td>
+          </VaButton></router-link>
         <td><img :src="Deportivo.Imagen"></td>
 
       </tr>
       </tbody>
     </table>
-    <template>
-      <VaButton
-          color="info"
-          gradient
-          class="mr-6 mb-2"
-      >
-        Info
-      </VaButton>
-      <VaButton
-          color="danger"
-          gradient
-          class="mr-6 mb-2"
-      >
-        Danger
-      </VaButton>
-      <VaButton
-          color="warning"
-          gradient
-          class="mr-6 mb-2"
-      >
-        Warning
-      </VaButton>
-    </template>
-
-    <template>
-      <div class="flex items-center gap-8 flex-wrap">
-        <VaButton round>
-          Label
-        </VaButton>
-        <VaButton
-            round
-            icon="thumb_up"
-        />
-        <VaButton
-            round
-            icon="close"
-        >
-          Label
-        </VaButton>
-      </div>
-    </template>
-
-
   </main>
 </template>
 <style>
@@ -102,6 +62,11 @@ table {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
+}
+VaButton{
+  float: left;
+  margin: 100px;
+  text-align: center;
 }
 
 div img {
