@@ -2,10 +2,10 @@
 import axios from "axios";
 import { defineComponent } from "vue";
 import debounce from "lodash/debounce.js";
-import { VaAlert, VaButton, VaInput } from 'vuestic-ui'
+import { VaAlert, VaButton, VaInput, VaSwitch, VaIcon } from 'vuestic-ui'
 
 export default defineComponent({
-  components: { VaAlert, VaButton, VaInput },
+  components: { VaIcon, VaSwitch, VaAlert, VaButton, VaInput },
   data() {
     return {
       Deportivos: [],
@@ -15,6 +15,8 @@ export default defineComponent({
       isDebounceInput: false,
       isCustomFilteringFn: false,
       filteredCount: 0,
+      value: false,
+      appBackgroundColor: '#5cc0bb'
     };
   },
   computed: {
@@ -57,7 +59,10 @@ export default defineComponent({
         .catch((error) => {
           console.error("Error fetching data: ", error);
         });
-    },
+    },changeBackground() {
+      // Cambia el color de fondo cuando se cambia el interruptor
+      this.appBackgroundColor = this.value ? '#ffffff' : '#5cc0bb';
+    }
   },
   mounted() {
     this.fetchData();
@@ -72,10 +77,26 @@ export default defineComponent({
     },
   },
 });
+
 </script>
 
 <template>
-  <main>
+  <main :style="{backgroundColor: appBackgroundColor }">
+    <div id="switch-container">
+      <VaSwitch
+        v-model="value"
+        color="#5123a1"
+        off-color="#ffd300"
+        @change="changeBackground"
+        style="--va-switch-checker-background-color: #252723;"
+      >
+        <template>
+          <div class="va-text-center">
+            <VaIcon :name="value ? 'dark_mode' : 'light_mode'" />
+          </div>
+        </template>
+      </VaSwitch>
+    </div>
     <div class="grid md:grid-cols-2 gap-6 mb-6">
       <VaInput
         v-model="input"
@@ -103,18 +124,25 @@ export default defineComponent({
       </tr>
       </tbody>
     </table>
-    <VaAlert class="!mt-6" color="info" outline>
-      Number of filtered items:
-      <VaChip>{{ filteredCount }}</VaChip>
-    </VaAlert>
+<!--    <VaAlert class="!mt-6" color="info" outline>-->
+<!--      Number of filtered items:-->
+<!--      <VaChip>{{ filteredCount }}</VaChip>-->
+<!--    </VaAlert>-->
   </main>
 </template>
 
 <style>
-#app{
+#app {
   width: 100%;
-  background-color: #55f3ed;
+  background-color: #5cc0bb;
 }
+
+#switch-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 va-data-table {
   border: 4px solid #000000;
   background-color: #dfeff1;
@@ -122,6 +150,7 @@ va-data-table {
   text-align: center;
   border-collapse: collapse;
 }
+
 table {
   border: 4px solid #000000;
   background-color: #dfeff1;
@@ -129,7 +158,17 @@ table {
   text-align: center;
   border-collapse: collapse;
 }
-VaButton{
+table th {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 60px;
+}
+table td{
+  text-align: center;
+  vertical-align: middle;
+}
+
+VaButton {
   float: left;
   margin: 100px;
   text-align: center;

@@ -1,11 +1,15 @@
 <script>
 import axios from 'axios';
+import { VaButton, VaSwitch } from 'vuestic-ui'
 
 export default {
+  components: { VaSwitch, VaButton },
   data() {
     return {
       coche: null,
-      id: null // Agrega una propiedad para almacenar el ID del coche deseado
+      id: null, // Agrega una propiedad para almacenar el ID del coche deseado
+      value: false,
+      appBackgroundColor: '#5cc0bb'
     };
   },
   mounted() {
@@ -25,13 +29,42 @@ export default {
         .catch(error => {
           console.error('Error al obtener datos del vehículo:', error);
         });
+    },changeBackground() {
+      // Cambia el color de fondo cuando se cambia el interruptor
+      this.appBackgroundColor = this.value ? '#ffffff' : '#5cc0bb';
     }
   }
 };
 </script>
 <template>
-  <div class="coche-details">
-    <h1>Detalles del Coche</h1>
+  <div class="coche-details" :style="{backgroundColor: appBackgroundColor }">
+   <div class="button-container">
+      <VaButton color="info"
+                gradient>
+        <router-link to="/">
+        Atras
+        </router-link>
+      </VaButton>
+     <h1>Detalles del Coche</h1>
+    </div>
+
+    <div id="switch-container">
+      <VaSwitch
+        v-model="value"
+        color="#5123a1"
+        off-color="#ffd300"
+        @change="changeBackground"
+        style="--va-switch-checker-background-color: #252723;"
+      >
+        <template>
+          <div class="va-text-center">
+            <VaIcon :name="value ? 'dark_mode' : 'light_mode'" />
+          </div>
+        </template>
+      </VaSwitch>
+    </div>
+
+
     <table class="details-table">
       <tbody>
       <tr>
@@ -63,16 +96,33 @@ export default {
 </template>
 
 <style>
-/* Estilos para la vista específica del detalle del coche */
-
+body {
+  height: 100%;
+  margin: 0;
+}
+.button-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#switch-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 .coche-details {
-  max-width: 90%; /* Para adaptarse al ancho del contenedor padre */
-  margin: 20px auto; /* Centrar y agregar espacio alrededor */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 95vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+h1{
+  text-align: center;
 }
 
 .coche-details h1 {
@@ -82,13 +132,14 @@ export default {
 }
 
 .details-table {
-  width: 100%;
+  width: 90%;
+  font-size: 16px;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
 .details-table td {
-  padding: 10px;
+  padding: 50px;
   border-bottom: 1px solid #ddd;
 }
 
