@@ -24,7 +24,7 @@ export default {
       axios.get(apiUrl)
         .then(response => {
           // Filtrar el vehículo deseado por ID
-          this.coche = response.data.find(vehicle => vehicle.id.toString() === this.id);
+          this.coche = response.data.find(hola => hola.id.toString() === this.id);
         })
         .catch(error => {
           console.error('Error al obtener datos del vehículo:', error);
@@ -45,9 +45,9 @@ export default {
         Atras
         </router-link>
       </VaButton>
-     <h1>Detalles del Coche</h1>
     </div>
 
+    <h1>Detalles del Coche</h1>
     <div id="switch-container">
       <VaSwitch
         v-model="value"
@@ -123,6 +123,9 @@ body {
 }
 h1{
   text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  align-self: center;
 }
 
 .coche-details h1 {

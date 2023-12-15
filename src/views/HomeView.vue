@@ -136,6 +136,13 @@ export default defineComponent({
   width: 100%;
   background-color: #5cc0bb;
 }
+main {
+  min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+  background-color: #5cc0bb; /* Color de fondo */
+  display: flex; /* Usa flexbox para centrar elementos verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
 
 #switch-container {
   position: absolute;
@@ -161,15 +168,15 @@ table {
 table th {
   font-size: 20px;
   font-weight: bold;
-  padding-bottom: 60px;
+  padding: 20px;
 }
 table td{
   text-align: center;
   vertical-align: middle;
+  padding: 20px;
 }
 
 VaButton {
-  float: left;
   margin: 100px;
   text-align: center;
 }

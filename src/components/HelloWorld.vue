@@ -19,6 +19,7 @@ h1 {
   font-size: 2.6rem;
   position: relative;
   top: -10px;
+  text-align: center;
 }
 
 h3 {
@@ -27,13 +28,11 @@ h3 {
 
 .greetings h1,
 .greetings h3 {
+  padding: 15px;
   text-align: center;
 }
 
 @media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+
 }
 </style>
