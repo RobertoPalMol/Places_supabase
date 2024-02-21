@@ -1,15 +1,16 @@
+
 <script>
 import axios from "axios";
 import { defineComponent } from "vue";
 import debounce from "lodash/debounce.js";
-import { VaAlert, VaButton, VaInput, VaSwitch, VaIcon } from 'vuestic-ui'
+import { VaInput, VaSwitch, VaIcon } from 'vuestic-ui'
 
 export default defineComponent({
-  components: { VaIcon, VaSwitch, VaAlert, VaButton, VaInput },
+  components: { VaIcon, VaSwitch, VaInput },
   data() {
     return {
       Deportivos: [],
-      url: "https://ltxbhwabgxtxbbvqlkte.supabase.co/rest/v1/Deportivos?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0eGJod2FiZ3h0eGJidnFsa3RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg5MjE0NjAsImV4cCI6MjAxNDQ5NzQ2MH0.p2asA2EMy8KovBVq3C0GTQPMqP7LlEPtWtJYlCTOKEY",
+      url: "https://uutmknblwzuolbfjqnpi.supabase.co/rest/v1/worldPlaces?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dG1rbmJsd3p1b2xiZmpxbnBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ5Njg2NzUsImV4cCI6MjAyMDU0NDY3NX0.pcNvaCeueBVCT3wQOC-p2t-g6oqC3CV3ipFYpeTQQoQ",
       input: "",
       filter: "",
       isDebounceInput: false,
@@ -35,10 +36,8 @@ export default defineComponent({
         return true;
       }
       return (
-        Deportivo.Coche.toLowerCase().includes(this.filter.toLowerCase()) ||
-        // Agrega más campos si es necesario para tu filtro
-        Deportivo.Tienda.toLowerCase().includes(this.filter.toLowerCase()) ||
-        Deportivo.Precio.includes(this.filter)
+        Deportivo.site_name.toLowerCase().includes(this.filter.toLowerCase()) ||
+        Deportivo.site_photo.includes(this.filter)
       );
     },
     updateFilter(filter) {
@@ -59,7 +58,8 @@ export default defineComponent({
         .catch((error) => {
           console.error("Error fetching data: ", error);
         });
-    },changeBackground() {
+    },
+    changeBackground() {
       // Cambia el color de fondo cuando se cambia el interruptor
       this.appBackgroundColor = this.value ? '#ffffff' : '#5cc0bb';
     }
@@ -77,9 +77,7 @@ export default defineComponent({
     },
   },
 });
-
 </script>
-
 <template>
   <main :style="{backgroundColor: appBackgroundColor }">
     <div id="switch-container">
@@ -108,26 +106,23 @@ export default defineComponent({
       <thead>
       <tr>
         <th>Id</th>
-        <th>Coche</th>
-        <th>Imagen</th>
+        <th>Site Name</th>
+        <th>Site Description</th>
+        <th>Site Photo</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(Deportivo) in filteredItems" :key="Deportivo.id">
-        <td>{{Deportivo.id}}</td>
-        <router-link :to="{ name: 'Coche', params: { id: Deportivo.id.toString() } }">
-          <VaButton round>
-            <span>{{ Deportivo.Coche }}</span>
-          </VaButton>
-        </router-link>
-        <td><img :src="Deportivo.Imagen"></td>
+      <tr v-for="(Site) in filteredItems" :key="Site.id">
+        <td>{{Site.id}}</td>
+
+        <td>{{ Site.site_name }}</td>
+
+        <td>{{Site.site_description }}</td>
+
+        <td><img :src="Site.site_photo"></td>
       </tr>
       </tbody>
     </table>
-<!--    <VaAlert class="!mt-6" color="info" outline>-->
-<!--      Number of filtered items:-->
-<!--      <VaChip>{{ filteredCount }}</VaChip>-->
-<!--    </VaAlert>-->
   </main>
 </template>
 
