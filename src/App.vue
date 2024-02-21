@@ -7,7 +7,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <header>
 
     <div>
-      <HelloWorld msg="Los Santos Custom" />
+      <HelloWorld msg="Sites of the world" />
     </div>
   </header>
 
