@@ -102,6 +102,14 @@ export default defineComponent({
         class="w-full"
       />
     </div>
+
+    <va-button
+      color="green"
+      gradient
+      class="link-container">
+      <router-link to="/list" class="centered-link" style="font-weight: bold">+ Añadir nuevo lugar</router-link>
+    </va-button>
+
     <table>
       <thead>
       <tr>
@@ -181,4 +189,13 @@ div img {
   height: auto;
   margin-bottom: 10px;
 }
+.link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+
+
 </style>
