@@ -1,23 +1,22 @@
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
       newItem: {
         site_name: "",
         site_description: "",
-        site_photo: "",
+        site_photo: ""
       },
-      url: "https://uutmknblwzuolbfjqnpi.supabase.co/rest/v1/worldPlaces",
-      apiKey: "?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dG1rbmJsd3p1b2xiZmpxbnBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ5Njg2NzUsImV4cCI6MjAyMDU0NDY3NX0.pcNvaCeueBVCT3wQOC-p2t-g6oqC3CV3ipFYpeTQQoQ",
+      url: "https://uutmknblwzuolbfjqnpi.supabase.co/rest/v1/worldPlaces?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dG1rbmJsd3p1b2xiZmpxbnBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ5Njg2NzUsImV4cCI6MjAyMDU0NDY3NX0.pcNvaCeueBVCT3wQOC-p2t-g6oqC3CV3ipFYpeTQQoQ"
     };
   },
   methods: {
     submitForm() {
       const headers = {
         "Content-Type": "application/json",
-        "apikey": this.apiKey,
-        "Authorization": `Bearer ${this.apiKey}`,
+        "Authorization": `Bearer ${this.url.split("=")[1]}`
       };
       axios.post(this.url, this.newItem, { headers: headers })
         .then(response => {
@@ -32,10 +31,10 @@ export default {
       this.newItem = {
         site_name: "",
         site_description: "",
-        site_photo: "",
+        site_photo: ""
       };
-    },
-  },
+    }
+  }
 };
 </script>
 

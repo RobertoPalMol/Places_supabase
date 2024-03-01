@@ -9,7 +9,7 @@ export default defineComponent({
   components: { VaIcon, VaSwitch, VaInput },
   data() {
     return {
-      Deportivos: [],
+      Lugares: [],
       url: "https://uutmknblwzuolbfjqnpi.supabase.co/rest/v1/worldPlaces?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dG1rbmJsd3p1b2xiZmpxbnBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ5Njg2NzUsImV4cCI6MjAyMDU0NDY3NX0.pcNvaCeueBVCT3wQOC-p2t-g6oqC3CV3ipFYpeTQQoQ",
       input: "",
       filter: "",
@@ -21,23 +21,23 @@ export default defineComponent({
     };
   },
   computed: {
-    DeportivosSorted() {
-      return this.Deportivos.slice().sort((a, b) => a.id - b.id);
+    LugaresSorted() {
+      return this.Lugares.slice().sort((a, b) => a.id - b.id);
     },
     filteredItems() {
-      return this.DeportivosSorted.filter((Deportivo) =>
-        this.customFilteringFn(Deportivo)
+      return this.LugaresSorted.filter((Lugar) =>
+        this.customFilteringFn(Lugar)
       );
     },
   },
   methods: {
-    customFilteringFn(Deportivo) {
+    customFilteringFn(Lugar) {
       if (this.filter === "") {
         return true;
       }
       return (
-        Deportivo.site_name.toLowerCase().includes(this.filter.toLowerCase()) ||
-        Deportivo.site_photo.includes(this.filter)
+        Lugar.site_name.toLowerCase().includes(this.filter.toLowerCase()) ||
+        Lugar.site_photo.includes(this.filter)
       );
     },
     updateFilter(filter) {
@@ -52,8 +52,8 @@ export default defineComponent({
     fetchData() {
       axios.get(this.url)
         .then((response) => {
-          this.Deportivos = response.data;
-          this.filteredCount = this.Deportivos.length;
+          this.Lugares = response.data;
+          this.filteredCount = this.Lugares.length;
         })
         .catch((error) => {
           console.error("Error fetching data: ", error);
